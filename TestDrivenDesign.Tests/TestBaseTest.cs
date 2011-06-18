@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDrivenDesign.Tests
@@ -28,6 +29,20 @@ namespace TestDrivenDesign.Tests
             // Assert
             Assert.AreEqual(expected, actual);
             Console.WriteLine(actual);
+        }
+
+        [TestMethod]
+        public void TestDirectoryCreatesADirectoryNamedForTestClassAndTestName()
+        {
+            // Arrange
+            var expected = TestPath();
+
+            // Act
+            string actual = base.TestDirectory();
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+            Assert.IsTrue(Directory.Exists(expected));
         }
     }
 }
