@@ -1,7 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDrivenDesign.Tests", "TestDrivenDesign.Tests\TestDrivenDesign.Tests.csproj", "{F5535372-DB0D-4027-A0E1-7CB794EF445F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{469B5022-90D0-4675-8619-A1863522B39B}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		readme.markdown = readme.markdown
+		TestDrivenDesign.vsmdi = TestDrivenDesign.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDrivenDesign", "TestDrivenDesign\TestDrivenDesign.csproj", "{EC284232-311E-4221-948D-1F5792BD2664}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TestDrivenDesign.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5535372-DB0D-4027-A0E1-7CB794EF445F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5535372-DB0D-4027-A0E1-7CB794EF445F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5535372-DB0D-4027-A0E1-7CB794EF445F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5535372-DB0D-4027-A0E1-7CB794EF445F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC284232-311E-4221-948D-1F5792BD2664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC284232-311E-4221-948D-1F5792BD2664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC284232-311E-4221-948D-1F5792BD2664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC284232-311E-4221-948D-1F5792BD2664}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
