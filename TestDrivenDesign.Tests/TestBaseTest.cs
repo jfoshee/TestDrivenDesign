@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDrivenDesign.Tests
 {
@@ -6,9 +7,27 @@ namespace TestDrivenDesign.Tests
     public class TestBaseTest : TestBase
     {
         [TestMethod]
-        public void TestContextProperty()
+        public void HasTestContextProperty()
         {
-            Assert.IsInstanceOfType(TestContext, typeof(TestContext));
+            // Arrange
+            TestContext testContext = base.TestContext;
+
+            // Assert
+            Assert.IsInstanceOfType(testContext, typeof(TestContext));
+        }
+
+        [TestMethod]
+        public void TestPathShouldContainTestClassAndTestName()
+        {
+            // Arrange
+            var expected = TestContext.DeploymentDirectory + "\\TestBaseTest.TestPathShouldContainTestClassAndTestName";
+
+            // Act
+            string actual = base.TestPath();
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+            Console.WriteLine(actual);
         }
     }
 }
