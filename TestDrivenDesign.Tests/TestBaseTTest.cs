@@ -52,9 +52,37 @@ namespace TestDrivenDesign.Tests
             // Assert
             Assert.AreNotSame(_subject1, _subject2);
         }
+
+        [TestMethod]
+        public void AbleToFactorOutPropertyGetter()
+        {
+            // Arrange
+            int expected = 12;
+            Subject.MyProperty = expected;
+
+            // Act
+            var actual = Get(() => Subject.MyProperty);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void AbleToFactorOutPropertySetter()
+        {
+            // Arrange
+            int expected = 12;
+
+            // Act
+            Set(() => Subject.MyProperty, expected);
+
+            // Assert
+            Assert.AreEqual(expected, Subject.MyProperty);
+        }
     }
 
     public class ExampleSubject
     {
+        public int MyProperty { get; set; }
     }
 }
