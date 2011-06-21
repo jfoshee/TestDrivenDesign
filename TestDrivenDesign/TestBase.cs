@@ -8,12 +8,14 @@ namespace TestDrivenDesign
     {
         public TestContext TestContext { get; set; }
 
+        /// <returns>A path in the deployment directory named for the test class and test method</returns>
         public string TestPath()
         {
             var testClassName = TestContext.FullyQualifiedTestClassName.Split('.').Last();
             return Path.Combine(TestContext.DeploymentDirectory, testClassName + "." + TestContext.TestName);
         }
 
+        /// <returns>A directory in the deployment directory created for the current test</returns>
         public string TestDirectory()
         {
             var directory = TestPath();
