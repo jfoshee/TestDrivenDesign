@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBaseTest.cs" />
     <Compile Include="TestBaseTTest.cs" />
+    <Compile Include="TextFileAssertTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestDrivenDesign\TestDrivenDesign.csproj">
