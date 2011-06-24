@@ -18,10 +18,10 @@ namespace TestDrivenDesign
         /// </summary>
         /// <param name="propertyExpression">For example: () => Subject.MyProperty</param>
         /// <returns>Returns current value of property given by expression</returns>
-        protected object Get<TProperty>(Expression<Func<TProperty>> propertyExpression)
+        protected TProperty Get<TProperty>(Expression<Func<TProperty>> propertyExpression)
         {
             var property = GetProperty(propertyExpression);
-            return Get(property);
+            return (TProperty)Get(property);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace TestDrivenDesign
         /// </summary>
         /// <param name="propertyExpression">For example: () => Subject.MyProperty</param>
         /// <returns>Sets value of property given by expression</returns>
-        protected void Set<TProperty>(Expression<Func<TProperty>> propertyExpression, object value)
+        protected void Set<TProperty>(Expression<Func<TProperty>> propertyExpression, TProperty value)
         {
             var property = GetProperty(propertyExpression);
             Set(property, value);
