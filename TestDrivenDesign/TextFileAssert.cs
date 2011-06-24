@@ -18,5 +18,12 @@ namespace TestDrivenDesign
             if (expected != actual)
                 throw new AssertFailedException("Files are not equal.");
         }
+
+        public static void Contains(string path, string expected)
+        {
+            var text = File.ReadAllText(path);
+            if (!text.Contains(expected))
+                throw new AssertFailedException("File does not contain: " + expected);
+        }
     }
 }

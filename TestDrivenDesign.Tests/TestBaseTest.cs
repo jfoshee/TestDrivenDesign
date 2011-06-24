@@ -44,5 +44,18 @@ namespace TestDrivenDesign.Tests
             Assert.AreEqual(expected, actual);
             Assert.IsTrue(Directory.Exists(expected));
         }
+
+        [TestMethod]
+        public void TextFilePath()
+        {
+            // Arrange
+            var expected = TestPath() + ".txt";
+
+            // Act
+            string actual = base.TextPath();
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

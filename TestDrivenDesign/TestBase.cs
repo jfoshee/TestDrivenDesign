@@ -22,5 +22,10 @@ namespace TestDrivenDesign
             Directory.CreateDirectory(directory);
             return directory;
         }
+
+        public string TextPath()
+        {
+            return TestPath() + ".txt";
+        }
     }
 }

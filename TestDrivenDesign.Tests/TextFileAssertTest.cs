@@ -16,7 +16,7 @@ namespace TestDrivenDesign.Tests
         public void FileExists()
         {
             // Arrange
-            var path = TestPath() + ".txt";
+            var path = TextPath();
             File.WriteAllText(path, "");
 
             // Act
@@ -28,29 +28,54 @@ namespace TestDrivenDesign.Tests
         [TestMethod, ExpectedException(typeof(AssertFailedException))]
         public void NotEqual()
         {
-            // Arrange
-            var expectedPath = TestPath() + "1.txt";
-            var actualPath = TestPath() + "2.txt";
-            File.WriteAllText(expectedPath, "a b c");
-            File.WriteAllText(actualPath, "x y z");
-
-            // Act
-            TextFileAssert.AreEqual(expectedPath, actualPath);
+            AssertTwoTextFilesEqual(false);
         }
 
         [TestMethod]
         public void Equality()
         {
+            AssertTwoTextFilesEqual(true);
+        }
+
+        private void AssertTwoTextFilesEqual(bool sameFiles)
+        {
             // Arrange
-            var expectedPath = TestPath() + "1.txt";
-            var actualPath = TestPath() + "2.txt";
-            File.WriteAllText(expectedPath, "a b c");
+            var expectedPath = TestPath() + "1";
+            var actualPath = TestPath() + "2";
             File.WriteAllText(actualPath, "a b c");
+            File.Copy(actualPath, expectedPath);
+            if (!sameFiles)
+                File.AppendAllText(expectedPath, "1 2 3");
 
             // Act
             TextFileAssert.AreEqual(expectedPath, actualPath);
+        }
 
-            // Assert: No exception
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void DoesNotContain()
+        {
+            // Arrange
+            var path = WriteMississippiFile();
+
+            // Act
+            TextFileAssert.Contains(path, "x");
+        }
+
+        [TestMethod]
+        public void DoesContain()
+        {
+            // Arrange
+            var path = WriteMississippiFile();
+
+            // Act
+            TextFileAssert.Contains(path, "sip");
+        }
+
+        private string WriteMississippiFile()
+        {
+            var path = TextPath();
+            File.WriteAllText(path, "mississippi");
+            return path;
         }
     }
 }

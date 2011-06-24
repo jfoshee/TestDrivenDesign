@@ -18,7 +18,7 @@ namespace TestDrivenDesign.Examples
         public void ShouldWriteHelloToFile()
         {
             // Arrange a unique file path for this test
-            var path = TestPath() + ".txt";
+            var path = TextPath();
 
             // Act
             HelloPlainText.Write(path);
@@ -26,8 +26,7 @@ namespace TestDrivenDesign.Examples
             // Assert the file contains the word 'Hello' 
             // and add a link to the results page for convenient human inspection
             TestContext.AddResultFile(path);
-            var text = File.ReadAllText(path);
-            StringAssert.Contains(text, "Hello");
+            TextFileAssert.Contains(path, "Hello");
         }
     }
 }
