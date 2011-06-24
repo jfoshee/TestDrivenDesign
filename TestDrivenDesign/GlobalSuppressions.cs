@@ -9,3 +9,5 @@
 // You do not need to add suppressions to this file manually.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Scope = "member", Target = "TestDrivenDesign.TestBase`1.#Get`1(System.Linq.Expressions.Expression`1<System.Func`1<!!0>>)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Scope = "member", Target = "TestDrivenDesign.TestBase`1.#Set`1(System.Linq.Expressions.Expression`1<System.Func`1<!!0>>,!!0)")]

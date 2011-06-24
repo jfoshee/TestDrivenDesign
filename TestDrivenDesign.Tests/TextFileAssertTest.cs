@@ -24,5 +24,33 @@ namespace TestDrivenDesign.Tests
 
             // Assert: No exception
         }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void NotEqual()
+        {
+            // Arrange
+            var expectedPath = TestPath() + "1.txt";
+            var actualPath = TestPath() + "2.txt";
+            File.WriteAllText(expectedPath, "a b c");
+            File.WriteAllText(actualPath, "x y z");
+
+            // Act
+            TextFileAssert.AreEqual(expectedPath, actualPath);
+        }
+
+        [TestMethod]
+        public void Equality()
+        {
+            // Arrange
+            var expectedPath = TestPath() + "1.txt";
+            var actualPath = TestPath() + "2.txt";
+            File.WriteAllText(expectedPath, "a b c");
+            File.WriteAllText(actualPath, "a b c");
+
+            // Act
+            TextFileAssert.AreEqual(expectedPath, actualPath);
+
+            // Assert: No exception
+        }
     }
 }
