@@ -55,7 +55,7 @@ namespace TestDrivenDesign.Tests
         public void DoesNotContain()
         {
             // Arrange
-            var path = WriteMississippiFile();
+            var path = WriteFileWithSomeStateNames();
 
             // Act
             TextFileAssert.Contains(path, "x");
@@ -65,7 +65,7 @@ namespace TestDrivenDesign.Tests
         public void DoesContain()
         {
             // Arrange
-            var path = WriteMississippiFile();
+            var path = WriteFileWithSomeStateNames();
 
             // Act
             TextFileAssert.Contains(path, "sip");
@@ -75,7 +75,7 @@ namespace TestDrivenDesign.Tests
         public void DoesNotContainLine()
         {
             // Arrange
-            var path = WriteMississippiFile();
+            var path = WriteFileWithSomeStateNames();
 
             // Act
             TextFileAssert.ContainsLine(path, "texas");
@@ -85,13 +85,33 @@ namespace TestDrivenDesign.Tests
         public void DoesContainLine()
         {
             // Arrange
-            var path = WriteMississippiFile();
+            var path = WriteFileWithSomeStateNames();
 
             // Act
             TextFileAssert.ContainsLine(path, "mississippi");
         }
 
-        private string WriteMississippiFile()
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void DoesNotStartWith()
+        {
+            // Arrange
+            var path = WriteFileWithSomeStateNames();
+
+            // Act
+            TextFileAssert.StartsWith(path, "sip");
+        }
+
+        [TestMethod]
+        public void DoesStartWith()
+        {
+            // Arrange
+            var path = WriteFileWithSomeStateNames();
+
+            // Act
+            TextFileAssert.StartsWith(path, "arkansas\nmiss");
+        }
+
+        private string WriteFileWithSomeStateNames()
         {
             var path = TextPath();
             File.WriteAllText(path, "arkansas\nmississippi\nalabama");

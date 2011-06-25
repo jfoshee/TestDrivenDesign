@@ -33,5 +33,12 @@ namespace TestDrivenDesign
             if (!lines.Contains(expected))
                 throw new AssertFailedException("File does not contain line: " + expected);
         }
+
+        public static void StartsWith(string path, string expected)
+        {
+            var text = File.ReadAllText(path);
+            if (!text.StartsWith(expected))
+                throw new AssertFailedException("File does not start with: " + expected);
+        }
     }
 }

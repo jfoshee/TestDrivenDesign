@@ -17,7 +17,7 @@ namespace TestDrivenDesign.Examples
         [TestMethod]
         public void ShouldWriteHelloToFile()
         {
-            // Arrange a unique file path for this test
+            // Arrange a unique text file path for this test
             var path = TextPath();
 
             // Act

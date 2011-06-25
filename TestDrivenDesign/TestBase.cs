@@ -23,6 +23,7 @@ namespace TestDrivenDesign
             return directory;
         }
 
+        /// <returns>A text file path in the deployment directory named for the test class and test method</returns>
         public string TextPath()
         {
             return TestPath() + ".txt";
