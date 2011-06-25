@@ -43,6 +43,26 @@ namespace TestDrivenDesign.Tests
             BinaryFileAssert.StartsWith(path, new byte[] { 10, 20, 30 });
         }
 
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void BytesNotAt()
+        {
+            // Arrange
+            var path = WriteBinaryTenToFifty();
+
+            // Act
+            BinaryFileAssert.BytesAt(path, 2, new byte[] { 10, 20, 30 });
+        }
+
+        [TestMethod]
+        public void BytesAt()
+        {
+            // Arrange
+            var path = WriteBinaryTenToFifty();
+
+            // Act
+            BinaryFileAssert.BytesAt(path, 2, new byte[] { 30, 40 });
+        }
+
         private string WriteBinaryTenToFifty()
         {
             var path = TestPath();
