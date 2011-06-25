@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDrivenDesign
@@ -24,6 +25,13 @@ namespace TestDrivenDesign
             var text = File.ReadAllText(path);
             if (!text.Contains(expected))
                 throw new AssertFailedException("File does not contain: " + expected);
+        }
+
+        public static void ContainsLine(string path, string expected)
+        {
+            var lines = File.ReadAllLines(path);
+            if (!lines.Contains(expected))
+                throw new AssertFailedException("File does not contain line: " + expected);
         }
     }
 }

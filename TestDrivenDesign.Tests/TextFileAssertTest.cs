@@ -71,10 +71,30 @@ namespace TestDrivenDesign.Tests
             TextFileAssert.Contains(path, "sip");
         }
 
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void DoesNotContainLine()
+        {
+            // Arrange
+            var path = WriteMississippiFile();
+
+            // Act
+            TextFileAssert.ContainsLine(path, "texas");
+        }
+
+        [TestMethod]
+        public void DoesContainLine()
+        {
+            // Arrange
+            var path = WriteMississippiFile();
+
+            // Act
+            TextFileAssert.ContainsLine(path, "mississippi");
+        }
+
         private string WriteMississippiFile()
         {
             var path = TextPath();
-            File.WriteAllText(path, "mississippi");
+            File.WriteAllText(path, "arkansas\nmississippi\nalabama");
             return path;
         }
     }
