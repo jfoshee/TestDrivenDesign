@@ -26,5 +26,25 @@ namespace TestDrivenDesign
                     throw new AssertFailedException("File does not have expected bytes at index: " + byteIndex);
             }
         }
+
+        public static void AreEqual(string expectedPath, string actualPath)
+        {
+            using (var expectedReader = File.OpenRead(expectedPath))
+            using (var actualReader = File.OpenRead(actualPath))
+            {
+                if (actualReader.Length != expectedReader.Length)
+                    throw new AssertFailedException("The files have a different length");
+                int expectedByte;
+                int actualByte;
+                do
+                {
+                    expectedByte = expectedReader.ReadByte();
+                    actualByte = actualReader.ReadByte();
+                    if (expectedByte != actualByte)
+                        throw new AssertFailedException("The files are not equal");
+                }
+                while (expectedByte != -1);
+            }
+        }
     }
 }
