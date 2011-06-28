@@ -99,6 +99,57 @@ namespace TestDrivenDesign.Tests
             BinaryFileAssert.AreEqual(expectedPath, actualPath);
         }
 
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void StartsWithNotFollowedBy()
+        {
+            // Arrange
+            var path = WriteBinaryTenToFifty();
+
+            // Act
+            BinaryFileAssert.StartsWith(path, new byte[] { 10, 20 })
+                .FollowedBy(new byte[] { 40, 50 });
+        }
+
+        [TestMethod]
+        public void StartsWithIsFollowedBy()
+        {
+            // Arrange
+            var path = WriteBinaryTenToFifty();
+
+            // Act
+            BinaryFileAssert.StartsWith(path, new byte[] { 10, 20 })
+                .FollowedBy(new byte[] { 30, 40 });
+        }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void BytesAreNotFollowedBy()
+        {
+            // Arrange
+            var path = WriteBinaryTenToFifty();
+
+            // Act
+            BinaryFileAssert.BytesAt(path, 1, new byte[] { 20, 30 })
+                .FollowedBy(new byte[] { 123 });
+        }
+
+        [TestMethod]
+        public void BytesAreFollowedBy()
+        {
+            // Arrange
+            var path = WriteBinaryTenToFifty();
+
+            // Act
+            BinaryFileAssert.BytesAt(path, 1, new byte[] { 20, 30 })
+                .FollowedBy(new byte[] { 40, 50 });
+        }
+
+        // TODO: Move AreEqual to the top
+        // TODO: Can we change the byte array to a params arg?
+        // TODO: Contains
+        // TODO: Contains.FollowedBy
+        // TODO: <T>At
+        // TODO: FollowedBy<T>
+
         private string WriteBinaryTenToFifty()
         {
             var path = TestPath();
