@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -18,6 +19,8 @@ namespace TestDrivenDesign
 
         public static BinaryFileAssert BytesAt(string path, int byteIndex, byte[] expected)
         {
+            if (expected == null)
+                throw new ArgumentNullException("expected");
             using (var reader = new BinaryReader(File.OpenRead(path)))
             {
                 reader.ReadBytes(byteIndex);

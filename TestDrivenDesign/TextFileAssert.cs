@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -37,7 +38,7 @@ namespace TestDrivenDesign
         public static void StartsWith(string path, string expected)
         {
             var text = File.ReadAllText(path);
-            if (!text.StartsWith(expected))
+            if (!text.StartsWith(expected, StringComparison.Ordinal))
                 throw new AssertFailedException("File does not start with: " + expected);
         }
     }
