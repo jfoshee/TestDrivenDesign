@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDrivenDesign.Tests
@@ -42,7 +41,7 @@ namespace TestDrivenDesign.Tests
 
             // Assert
             Assert.AreEqual(expected, actual);
-            Assert.IsTrue(Directory.Exists(expected));
+            DirectoryAssert.Exists(expected);
         }
 
         [TestMethod]
