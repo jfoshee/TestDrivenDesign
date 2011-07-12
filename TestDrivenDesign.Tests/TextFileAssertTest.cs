@@ -111,6 +111,26 @@ namespace TestDrivenDesign.Tests
             TextFileAssert.StartsWith(path, "arkansas\nmiss");
         }
 
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void DoesNotEndWith()
+        {
+            // Arrange
+            var path = WriteFileWithSomeStateNames();
+
+            // Act
+            TextFileAssert.EndsWith(path, "sip");
+        }
+
+        [TestMethod]
+        public void DoesEndWith()
+        {
+            // Arrange
+            var path = WriteFileWithSomeStateNames();
+
+            // Act
+            TextFileAssert.EndsWith(path, "ippi\nalabama");
+        }
+
         private string WriteFileWithSomeStateNames()
         {
             var path = TextPath();

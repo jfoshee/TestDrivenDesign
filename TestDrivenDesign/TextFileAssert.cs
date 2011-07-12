@@ -41,5 +41,12 @@ namespace TestDrivenDesign
             if (!text.StartsWith(expected, StringComparison.Ordinal))
                 throw new AssertFailedException("File does not start with: " + expected);
         }
+
+        public static void EndsWith(string path, string expected)
+        {
+            var text = File.ReadAllText(path);
+            if (!text.EndsWith(expected, StringComparison.Ordinal))
+                throw new AssertFailedException("File does not end with: " + expected);
+        }
     }
 }

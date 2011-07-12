@@ -21,6 +21,7 @@ Here is a quick reference of the classes and members available
  - Contains(path, expected)
  - ContainsLine(path, expected)
  - StartsWith(path, expected)
+ - EndsWith(path, expected)
 - BinaryFileAssert
  - Exists(path)
  - AreEqual(expectedPath, actualPath)
