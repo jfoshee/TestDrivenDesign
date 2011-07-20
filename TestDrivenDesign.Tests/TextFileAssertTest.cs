@@ -131,10 +131,37 @@ namespace TestDrivenDesign.Tests
             TextFileAssert.EndsWith(path, "ippi\nalabama");
         }
 
+        [TestMethod]
+        public void EndsWithIgnoresFinalNewLine()
+        {
+            // Arrange
+            var path = WriteLinesABC();
+
+            // Assert
+            TextFileAssert.EndsWith(path, "c");
+        }
+
+        [TestMethod]
+        public void EndsWithRespectsFinalNewLineIfProvided()
+        {
+            // Arrange
+            var path = WriteLinesABC();
+
+            // Assert
+            TextFileAssert.EndsWith(path, "c\r\n");
+        }
+
         private string WriteFileWithSomeStateNames()
         {
             var path = TextPath();
             File.WriteAllText(path, "arkansas\nmississippi\nalabama");
+            return path;
+        }
+
+        private string WriteLinesABC()
+        {
+            var path = TestPath();
+            File.WriteAllLines(path, new string[] { "a", "b", "c" });
             return path;
         }
     }
