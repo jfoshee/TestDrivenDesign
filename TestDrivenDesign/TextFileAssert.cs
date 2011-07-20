@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -38,15 +38,17 @@ namespace TestDrivenDesign
         public static void StartsWith(string path, string expected)
         {
             var text = File.ReadAllText(path);
-            if (!text.StartsWith(expected, StringComparison.Ordinal))
+            if (!text.StartsWith(expected, _comparison))
                 throw new AssertFailedException("File does not start with: " + expected);
         }
 
         public static void EndsWith(string path, string expected)
         {
             var text = File.ReadAllText(path);
-            if (!text.EndsWith(expected, StringComparison.Ordinal))
+            if (!(text.EndsWith(expected, _comparison) || text.EndsWith(expected + "\r\n", _comparison)))
                 throw new AssertFailedException("File does not end with: " + expected);
         }
+
+        private const StringComparison _comparison = StringComparison.Ordinal;
     }
 }
