@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,6 +16,12 @@ namespace TestDrivenDesign
         {
             if (Directory.EnumerateFileSystemEntries(directory, searchPattern).Count() == 0)
                 throw new AssertFailedException("Directory does not contain: " + searchPattern);
+        }
+
+        public static void IsEmpty(string directory)
+        {
+            if (Directory.EnumerateFiles(directory).Count() > 0)
+                throw new AssertFailedException("Directory is not empty: " + directory);
         }
     }
 }
