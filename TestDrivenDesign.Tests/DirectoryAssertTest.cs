@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDrivenDesign.Tests
@@ -58,6 +58,27 @@ namespace TestDrivenDesign.Tests
             // Act
             DirectoryAssert.Contains(TestDirectory(), "foo*");
             DirectoryAssert.Contains(TestDirectory(), "foobar");
+        }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void IsEmptyFails()
+        {
+            // Arrange
+            var directory = TestDirectory();
+            File.WriteAllText(directory + "\\foo.txt", "...");
+
+            // Act
+            DirectoryAssert.IsEmpty(directory);
+        }
+
+        [TestMethod]
+        public void IsEmptyPasses()
+        {
+            // Arrange
+            var directory = TestDirectory();
+
+            // Act
+            DirectoryAssert.IsEmpty(directory);
         }
     }
 }
