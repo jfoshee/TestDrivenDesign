@@ -42,7 +42,7 @@ namespace TestDrivenDesign.Tests
         public void DoesContainFile()
         {
             // Arrange
-            File.WriteAllText(TestDirectory() + "\\foobar.txt", "abc");
+            TestDirectoryWithFoobarTxt();
 
             // Act
             DirectoryAssert.Contains(TestDirectory(), "foo*");
@@ -53,7 +53,7 @@ namespace TestDrivenDesign.Tests
         public void DoesContainDirectory()
         {
             // Arrange
-            Directory.CreateDirectory(TestDirectory() + "\\foobar");
+            TestDirectoryWithFoobarDirectory();
 
             // Act
             DirectoryAssert.Contains(TestDirectory(), "foo*");
@@ -79,6 +79,97 @@ namespace TestDrivenDesign.Tests
 
             // Act
             DirectoryAssert.IsEmpty(directory);
+        }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void DoesNotContainFailsWithFile()
+        {
+            // Arrange
+            var directory = TestDirectoryWithFoobarTxt();
+            var searchPattern = "*.txt";
+
+            // Act
+            DirectoryAssert.DoesNotContain(directory, searchPattern);
+        }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void DoesNotContainFailsWithDirectory()
+        {
+            // Arrange
+            var directory = TestDirectoryWithFoobarDirectory();
+
+            // Act
+            DirectoryAssert.DoesNotContain(directory, "foo*");
+        }
+
+        [TestMethod]
+        public void DoesNotContainPasses()
+        {
+            // Arrange
+            var directory = TestDirectoryWithFoobarTxt();
+
+            // Act
+            DirectoryAssert.DoesNotContain(directory, "*.ini");
+        }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void CountFails()
+        {
+            // Arrange
+            var directory = TestDirectoryWithFoobarTxt();
+            int expected = 2;
+
+            // Act
+            DirectoryAssert.Count(directory, expected);
+        }
+
+        [TestMethod]
+        public void CountPases()
+        {
+            // Arrange
+            TestDirectoryWithFoobarDirectory();
+            TestDirectoryWithFoobarTxt();
+
+            // Act
+            DirectoryAssert.Count(TestDirectory(), 2);
+        }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void CountWithSearchPatternFails()
+        {
+            // Arrange
+            TestDirectoryWithFoobarDirectory();
+            TestDirectoryWithFoobarTxt();
+            var searchPattern = "abc*";
+            int expected = 2;
+
+            // Act
+            DirectoryAssert.Count(TestDirectory(), searchPattern, expected);
+        }
+
+        [TestMethod]
+        public void CountWithSearchPatternPasses()
+        {
+            // Arrange
+            TestDirectoryWithFoobarDirectory();
+            TestDirectoryWithFoobarTxt();
+
+            // Act
+            DirectoryAssert.Count(TestDirectory(), "foo*", 2);
+        }
+
+        private string TestDirectoryWithFoobarTxt()
+        {
+            var directory = TestDirectory();
+            File.WriteAllText(directory + "\\foobar.txt", "abc");
+            return directory;
+        }
+
+        private string TestDirectoryWithFoobarDirectory()
+        {
+            var directory = TestDirectory();
+            Directory.CreateDirectory(directory + "\\foobar");
+            return directory;
         }
     }
 }
