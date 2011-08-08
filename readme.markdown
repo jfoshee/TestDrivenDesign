@@ -15,6 +15,10 @@ Here is a quick reference of the classes and members available
 - DirectoryAssert
  - Exists(directory)
  - Contains(directory, searchPattern)
+ - DoesNotContain(directory, searchPattern)
+ - IsEmpty(directory)
+ - Count(directory, expected)
+ - Count(directory, searchPattern, expected)
 - TextFileAssert
  - Exists(path)
  - AreEqual(expectedPath, actualPath)
