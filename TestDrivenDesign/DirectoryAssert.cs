@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -40,7 +41,7 @@ namespace TestDrivenDesign
         {
             var count = GetCount(directory, searchPattern);
             if (count != expected)
-                throw new AssertFailedException(String.Format("Directory contains {0} file entries matching '{1}'.  Expected: {2}", count, searchPattern, expected));
+                throw new AssertFailedException(String.Format(CultureInfo.CurrentCulture, "Directory contains {0} file entries matching '{1}'.  Expected: {2}", count, searchPattern, expected));
         }
 
         private static int GetCount(string directory, string searchPattern)

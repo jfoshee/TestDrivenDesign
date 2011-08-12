@@ -124,7 +124,7 @@ namespace TestDrivenDesign.Tests
         }
 
         [TestMethod]
-        public void CountPases()
+        public void CountPasses()
         {
             // Arrange
             TestDirectoryWithFoobarDirectory();
