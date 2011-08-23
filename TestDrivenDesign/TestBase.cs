@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -28,5 +29,29 @@ namespace TestDrivenDesign
         {
             return TestPath() + ".txt";
         }
+
+        #region Data Driven Helpers
+
+        public int DataValueAsInt(string name)
+        {
+            return Convert.ToInt32(TestContext.DataRow[name]);
+        }
+
+        public float DataValueAsFloat(string name)
+        {
+            return Convert.ToSingle(TestContext.DataRow[name]);
+        }
+
+        public bool DataValueAsBool(string name)
+        {
+            return Convert.ToBoolean(TestContext.DataRow[name]);
+        }
+
+        public string DataValueAsString(string name)
+        {
+            return TestContext.DataRow[name].ToString();
+        }
+
+        #endregion
     }
 }

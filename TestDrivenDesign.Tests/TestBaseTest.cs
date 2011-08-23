@@ -56,5 +56,14 @@ namespace TestDrivenDesign.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod, DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "|DataDirectory|\\DataDrivenSample.csv", "DataDrivenSample#csv", DataAccessMethod.Sequential), DeploymentItem("TestDrivenDesign.Tests\\DataDrivenSample.csv")]
+        public void DataDrivenHelpers()
+        {
+            Assert.AreEqual(12, base.DataValueAsInt("SampleInt"));
+            Assert.AreEqual(1.23f, base.DataValueAsFloat("SampleFloat"));
+            Assert.AreEqual("Expected!", base.DataValueAsString("SampleString"));
+            Assert.AreEqual(true, base.DataValueAsBool("SampleBool"));
+        }
     }
 }
