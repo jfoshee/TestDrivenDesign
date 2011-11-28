@@ -2,11 +2,12 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace TestDrivenDesign
 {
     [TestClass]
-    public abstract class TestBase<T> : TestBase where T : new()
+    public abstract class TestBase<T> : TestBase where T : class, new()
     {
         /// <summary>
         /// The test subject.  A new instance is default constructed for each test method.
@@ -33,6 +34,26 @@ namespace TestDrivenDesign
         {
             var property = GetProperty(propertyExpression);
             Set(property, value);
+        }
+
+        protected Mock<T> MockSubject()
+        {
+            var mock = new Mock<T> { CallBase = true };
+            Subject = mock.Object;
+            return mock;
+        }
+
+        protected void Verify(Expression<Action<T>> expression)
+        {
+            try
+            {
+                Mock.Get(Subject).Verify(expression);
+            }
+            catch (MockException)
+            {
+                // Translate the MockException to an AssertFailedException so it reads better with Microsoft's testing tools
+                throw new AssertFailedException("Expected invocation: " + expression.ToString());
+            }
         }
 
         #region Behind the scenes...

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace TestDrivenDesign.Tests
 {
@@ -79,10 +80,46 @@ namespace TestDrivenDesign.Tests
             // Assert
             Assert.AreEqual(expected, Subject.MyProperty);
         }
+
+        [TestMethod]
+        public void ShouldMockSubjectAndCallBaseImplementations()
+        {
+            // Act
+            Mock<ExampleSubject> mock = base.MockSubject();
+
+            // Assert
+            Assert.AreSame(Subject, mock.Object, "The Subject is mocked");
+            Assert.IsTrue(mock.CallBase, "Because the Subject's behavior is being tested, we default to calling its implementations");
+        }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void ShouldThrowWhenVerifyingMethodThatWasNotCalled()
+        {
+            // Arrange
+            MockSubject();
+
+            // Act
+            base.Verify(s => s.MyVirtualMethod());
+        }
+
+        [TestMethod]
+        public void ShouldNotThrowWhenVerifyingMethodThatWasCalled()
+        {
+            // Arrange
+            MockSubject();
+            Subject.MyVirtualMethod();
+
+            // Act
+            base.Verify(s => s.MyVirtualMethod());
+        }
     }
 
     public class ExampleSubject
     {
         public int MyProperty { get; set; }
+
+        public virtual void MyVirtualMethod()
+        {
+        }
     }
 }
