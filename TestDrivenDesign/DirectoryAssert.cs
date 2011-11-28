@@ -14,6 +14,12 @@ namespace TestDrivenDesign
                 throw new AssertFailedException("Directory does not exist: " + directory);
         }
 
+        public static void DoesNotExist(string directory)
+        {
+            if (Directory.Exists(directory))
+                throw new AssertFailedException("Directory does exist: " + directory);
+        }
+
         public static void Contains(string directory, string searchPattern)
         {
             if (GetCount(directory, searchPattern) == 0)

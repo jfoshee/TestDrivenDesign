@@ -7,7 +7,7 @@ namespace TestDrivenDesign.Tests
     public class DirectoryAssertTest : TestBase
     {
         [TestMethod, ExpectedException(typeof(AssertFailedException))]
-        public void DirectoryDoesNotExist()
+        public void ExistsShouldThrowWhenDirectoryNotThere()
         {
             // Arrange
             var directory = TestPath();
@@ -17,14 +17,33 @@ namespace TestDrivenDesign.Tests
         }
 
         [TestMethod]
-        public void DirectoryDoesExist()
+        public void ExistsShouldNotThrowWhenDirectoryThere()
         {
             // Arrange
-            var directory = TestPath();
-            Directory.CreateDirectory(directory);
+            var directory = TestDirectory();
 
             // Act
             DirectoryAssert.Exists(directory);
+        }
+
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void DoesNotExistShouldThrowWhenDirectoryThere()
+        {
+            // Arrange
+            var directory = TestDirectory();
+
+            // Act
+            DirectoryAssert.DoesNotExist(directory);
+        }
+
+        [TestMethod]
+        public void DoesNotExistShouldNotThrowWhenDirectoryNotThere()
+        {
+            // Arrange
+            var directory = TestPath();
+
+            // Act
+            DirectoryAssert.DoesNotExist(directory);
         }
 
         [TestMethod, ExpectedException(typeof(AssertFailedException))]
