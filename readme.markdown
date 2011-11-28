@@ -8,6 +8,10 @@ Here is a quick reference of the classes and members available
  - TestPath()
  - TextPath()
  - TestDirectory()
+ - DataValueAsInt(name)
+ - DataValueAsFloat(name)
+ - DataValueAsString(name)
+ - DataValueAsBool(name)
 - TestBase<T>
  - Subject
  - Get(propertyExpression)
