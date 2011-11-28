@@ -16,6 +16,7 @@ Here is a quick reference of the classes and members available
  - Subject
  - Get(propertyExpression)
  - Set(propertyExpression, value)
+ - MockSubject(), Verify(expression)
 - DirectoryAssert
  - Exists(directory)
  - Contains(directory, searchPattern)
