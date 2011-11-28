@@ -19,6 +19,7 @@ Here is a quick reference of the classes and members available
  - MockSubject(), Verify(expression)
 - DirectoryAssert
  - Exists(directory)
+ - DoesNotExist(directory)
  - Contains(directory, searchPattern)
  - DoesNotContain(directory, searchPattern)
  - IsEmpty(directory)
