@@ -12,7 +12,7 @@ Here is a quick reference of the classes and members available
  - DataValueAsFloat(name)
  - DataValueAsString(name)
  - DataValueAsBool(name)
-- TestBase<T>
+- TestBase< T >
  - Subject
  - Get(propertyExpression)
  - Set(propertyExpression, value)
