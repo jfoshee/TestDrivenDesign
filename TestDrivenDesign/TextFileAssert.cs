@@ -45,7 +45,7 @@ namespace TestDrivenDesign
         public static void EndsWith(string path, string expected)
         {
             var text = File.ReadAllText(path);
-            if (!(text.EndsWith(expected, _comparison) || text.EndsWith(expected + "\r\n", _comparison)))
+            if (!(text.EndsWith(expected, _comparison) || text.EndsWith(expected + Environment.NewLine, _comparison)))
                 throw new AssertFailedException("File does not end with: " + expected);
         }
 

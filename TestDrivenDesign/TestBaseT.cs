@@ -36,6 +36,24 @@ namespace TestDrivenDesign
             Set(property, value);
         }
 
+        /// <summary>
+        /// Supplies a mock implementation of a property on the Subject.
+        /// </summary>
+        /// <param name="propertyExpression">For example: () => Subject.MyProperty</param>
+        /// <returns>The Moq.Mock instance which allows further setup of the mock behavior.</returns>
+        protected Mock<TProperty> MockProperty<TProperty>(Expression<Func<TProperty>> propertyExpression) where TProperty : class
+        {
+            var mock = new Mock<TProperty>();
+            Set(propertyExpression, mock.Object);
+            return mock;
+        }
+
+        /// <summary>
+        /// Sets the Subject to a mock implementation. 
+        /// This allows sensing how the Subject is using its own methods and properties.
+        /// </summary>
+        /// <seealso cref="Verify"/>
+        /// <returns>The Moq.Mock instance which allows further setup of the mock behavior.</returns>
         protected Mock<T> MockSubject()
         {
             var mock = new Mock<T> { CallBase = true };
@@ -43,6 +61,11 @@ namespace TestDrivenDesign
             return mock;
         }
 
+        /// <summary>
+        /// Verifies that the given expression was invoked on the Subject.  You should call MockSubject() first.
+        /// </summary>
+        /// <seealso cref="MockSubject()"/>
+        /// <param name="expression"></param>
         protected void Verify(Expression<Action<T>> expression)
         {
             try

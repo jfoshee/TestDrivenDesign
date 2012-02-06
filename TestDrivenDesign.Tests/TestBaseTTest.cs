@@ -82,6 +82,17 @@ namespace TestDrivenDesign.Tests
         }
 
         [TestMethod]
+        public void ShouldMockAProperty()
+        {
+            // Act
+            Mock<IExampleInterface> mockedProperty =
+                MockProperty(() => Subject.MyInterfaceProperty);
+
+            // Assert
+            Assert.AreSame(mockedProperty.Object, Subject.MyInterfaceProperty);
+        }
+
+        [TestMethod]
         public void ShouldMockSubjectAndCallBaseImplementations()
         {
             // Act
@@ -114,9 +125,15 @@ namespace TestDrivenDesign.Tests
         }
     }
 
+    public interface IExampleInterface
+    {
+        int Unimportant { get; }
+    }
+
     public class ExampleSubject
     {
         public int MyProperty { get; set; }
+        public IExampleInterface MyInterfaceProperty { get; set; }
 
         public virtual void MyVirtualMethod()
         {
